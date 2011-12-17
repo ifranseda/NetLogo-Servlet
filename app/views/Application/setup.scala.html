@@ -1,0 +1,97 @@
+@(
+    title:String
+)(
+    implicit 
+    params:play.mvc.Scope.Params,
+    errors:Map[String,play.data.validation.Error]
+)
+ 
+@main(title) {
+        <h3>Setup Simulation</h3>
+
+        <form class="nice custom containment" action="@action(controllers.Application.simulate_local)" method="post">
+            <div class="row">
+                <div class="row">
+                    <div class="three columns label">
+                        &nbsp;
+                    </div>
+                    <div class="three columns">
+                        @if(errors) {
+                            <p class="error">
+                                All fields are required!
+                            </p>
+                        }
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="three columns label">
+                        <label for="areaname">
+                        Daerah simulasi
+                        </label>
+                    </div>
+                    <div class="seven columns">
+                        <select style="display:none;" name="areaname">
+                            <option value="sulsel">Sulawesi Selatan</option>
+                            <option value="sulut">Sulawesi Utara</option>
+                            <option value="ntb" selected>Nusa Tenggara Barat</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="three columns label">
+                        <label for="r2500">
+                        Resolusi hasil peta
+                        </label>
+                    </div>
+                    <div class="seven columns">
+                        <label for="r2500"><input type="radio" id="r2500" name="resolusi" value="2500" checked /> 2500</label>
+                        <label for="r1000"><input type="radio" id="r1000" name="resolusi" value="1000" /> 1000</label>
+                        <label for="r800"><input type="radio" id="r800" name="resolusi" value="800" /> 800</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="three columns label">
+                        <label for="tahunAwal">
+                        Tahun Awal
+                        </label>
+                    </div>
+                    <div class="three columns">
+                        <label for="tahunAwal"><input type="text" class="input-text policy inline" maxlength="4" value="2005" id="tahunAwal" name="tahunAwal" /></label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="three columns label">
+                        <label for="lamaSimulasi">
+                        Lama simulasi
+                        </label>
+                    </div>
+                    <div class="three columns">
+                        <label for="lamaSimulasi"><input type="text" class="input-text policy inline" maxlength="2" value="10" id="lamaSimulasi" name="lamaSimulasi" /> tahun</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="three columns label">
+                        <label for="bebas">
+                        Skenario
+                        </label>
+                    </div>
+                    <div class="seven columns">
+                        <label for="bebas"><input type="radio" id="bebas" name="skenario" value="bau" checked /> Bebas</label>
+                        <label for="rtrw"><input type="radio" id="rtrw" name="skenario" value="rtrw" /> Mengikuti RTRW</label>
+                        <label for="limited"><input type="radio" id="limited" name="skenario" value="terbatas" /> RTRW Konversi terbatas</label>
+                    </div>
+                </div>
+                <div class="row">
+                </div>
+                <div class="row">
+                    <div class="three columns label">
+                        &nbsp;
+                    </div>
+                    <div class="three columns">
+                        <p><button class="nice radius blue button" type="submit" id="btnRun">Jalankan Simulasi</button></p>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+}

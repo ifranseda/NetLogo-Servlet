@@ -1,0 +1,129 @@
+@(title: String)
+
+@main("Running Simulation") {
+    <h1>Running Simulation</h1>
+
+    <div class="row">
+        <div id="activity-container">
+            <span id="activity-status"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div id="graph" class="twelve" style="width: 700px; height: 400px;"></div>
+    </div>
+
+    <script src="@asset("public/javascripts/highcharts/highcharts.js")" type="text/javascript"></script>
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function() {
+            $.get('@asset("public/models/data/output/1322069371414/changearea.json")', function(response){ buildChart(response); });
+
+            function buildChart (ca) {
+                
+                var yrs = ca.year;
+                var totalY = ca.primaryForest[0]+ca.secondaryForest[0]+ca.shrubs[0]+ca.plantation[0]+ca.settlement[0]+ca.drylandAgriculture[0]+ ca.riceField[0]+ ca.swamp[0];
+
+                var chart = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'graph',
+                    defaultSeriesType: 'area'
+                },
+                colors:[
+                    '#025e02',
+                    '#048c04',
+                    '#07f407',
+                    '#d1f387',
+                    '#ff0000',
+                    '#0000ff',
+                    '#ffa800',
+                    '#f6ff00',
+                    '#7d7d7d'
+                ],
+                credits: { enabled: false },
+                title: {
+                    text: 'Land Cover Changes',
+                    margin: 30
+                },
+                xAxis: {
+                    categories: yrs, labels: {rotation: 45, y: 20},
+                    startOnTick: true
+                },
+                yAxis: {
+                    endOnTick: false,
+                    min: 0,
+                    max: totalY,
+                    lineWidth: 1,
+                    tickWidth: 1,
+                    offset: 20,
+                    title: {
+                        text: 'Area (x1000 ha)'
+                    },
+                    labels: {
+                        formatter: function() {
+                            return (this.value / 1000);
+                        }
+                    }
+
+                },
+                legend: {
+                    align: 'right',
+                    verticalAlign: 'top',
+                    x: 0,
+                    y: 45,
+                    floating: false,
+                    backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColorSolid) || 'white',
+                    borderColor: '#CCC',
+                    borderWidth: 1,
+                    shadow: false,
+                    layout: "vertical"
+                },
+                tooltip: {
+                    formatter: function() {
+                        return '<b>' + this.x + '</b><br/>' + this.series.name +': '+ this.y;
+                    }
+                },
+                plotOptions: {
+                    area: {
+                        stacking: 'normal',
+                        lineColor: '#666666',
+                        lineWidth: 0,
+                        fillOpacity: 1,
+                        marker: {
+                            enabled: false,
+                            lineWidth: 0,
+                            lineColor: '#666666'
+                        }
+                     }
+                },
+                series: [{
+                    name: 'Primary Forest',
+                    data: ca.primaryForest
+                    }, {
+                    name: 'Secondary Forest',
+                    data: ca.secondaryForest
+                    }, {
+                    name: 'Shrubs',
+                    data: ca.shrubs
+                    }, {
+                    name: 'Plantation',
+                    data: ca.plantation
+                    }, {
+                    name: 'Settlement',
+                    data: ca.settlement
+                    }, {
+                    name: 'Water Body',
+                    data: ca.waterBody
+                    }, {
+                    name: 'Dryland Agriculture',
+                    data: ca.drylandAgriculture
+                    }, {
+                    name: 'Rice Fields',
+                    data: ca.riceField
+                    }, {
+                    name: 'Swamps',
+                    data: ca.swamp
+                    }]
+                });
+            }
+        });
+    </script>
+}

@@ -1,0 +1,80 @@
+/* Artfully masterminded by ZURB  */
+
+/* -------------------------------------------------- 
+   Table of Contents
+-----------------------------------------------------
+:: Shared Styles
+:: Page Name 1
+:: Page Name 2
+*/
+
+
+/* -----------------------------------------
+   Shared Styles
+----------------------------------------- */
+
+hr, hr.blue {
+	border-color: #00A6FC;
+	border-width: 1px;
+}
+hr.gray {
+	border-color: #CCC;
+	border-width: 1px;
+}
+.policy {
+	width: 38px !important;
+}
+.skenario {
+	width: 38px !important;
+	display: inline !important;
+	padding: 2px 3px !important;
+	margin: 0;
+}
+.label {
+	font-size: 14px;
+	height: 28px;
+	padding: 5px 0 0 0;
+	margin: 0 0 0 0;
+	text-align: right;
+	vertical-align: middle;
+}
+
+.row {
+	padding-top: 7px;
+}
+.odd {
+	background: #DEE9FE;
+}
+ul.contained.tabs-content li {
+	padding: 15px 5px 20px !important;
+}
+.containment {
+	border: 1px solid #EEE;
+}
+button {
+	font-size: 13px;
+	font-family: "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
+/* -----------------------------------------
+   Map
+----------------------------------------- */
+
+#map {
+	padding: 5px;
+	margin: 0 0 20px;
+	height: 600px;
+}
+
+#graph {
+	width: 638px;
+}
+
+
+/* -----------------------------------------
+   Setup Simulation
+----------------------------------------- */
+
+input.inline {
+    display: inline !important;
+}
